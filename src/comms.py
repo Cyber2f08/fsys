@@ -2,7 +2,7 @@ import sys
 from src.tsl import xrint, Danger, Warning, Information, Ok
 from rich import pretty
 from src.auth import Worker
-from src.cmt import LatestFmode, _pcmt, _gpcmt, _glamod, _glaclr
+from src.cmt import _pcmt, _gpcmt
 import src.ocec as o
 
 def load():
@@ -124,8 +124,8 @@ def shell(info):
             xrint(Danger, "Program interupted & crashed to prevent faulty scripts to run.")
             xrint(Information, "Create an issue on github!")
             print("\n Details:")
-            print(" -> src ")
-            print("  ]-> cmt.py\n")
+            print(" |-> src ")
+            print("  |->> cmt.py\n")
             print(f" Unknown built-in shell command in cmt.py (Module), The unknown command is '{i}'")
 
             sys.exit(1)
@@ -135,7 +135,7 @@ def shell(info):
             print(" Command available, but the developer has not implement a function yet into the command. SORRY!\n")
             return False;
         if _p[0] != True:
-            print(" Command not available, Use 'help' for commands.\n")
+            print(f" Command named '{cmt[0]}' is not available, Use 'help' for commands.\n")
             return False;
         _pcmt(cmt=cmt, token=token, ct=ct)
 
@@ -149,9 +149,10 @@ def shell(info):
 
     Message of the DAY, {msg_dy[random.randint(0, len(msg_dy)-1)]}
     '''
-    
+    )
+
     while True:
-        _il = p.input(f" [yellow]{info[0].lower()}[/]@[yellow]yorgc[/] # ")
+        _il = p.input(f" [cyan]{info[0].lower()}[/] @ [green]yorgc[/] # ")
  
         if _il_proc(_il) != True:
             continue
