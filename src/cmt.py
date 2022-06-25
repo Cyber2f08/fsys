@@ -4,9 +4,6 @@ import src.tsl as o
 import random, sys
 
 Tips = ["Use exit instead of CTRL-C because it will make the shell BROKE."]
-LatestFmode = ""
-FBoMod = False
-
 def cmit():
     return "\n";
 
@@ -15,16 +12,6 @@ def cmout():
 
 def _gpcmt():
     return ["help", "exit", "clear", "rbinfo"]
-
-def _glamod():
-    if LatestFmode == "":
-        return False, LatestFmode;
-    return True, LatestFmode
-
-def _glaclr():
-    global LatestFmode,FBoMod
-    LatestFmode = ""
-    return True;
 
 def _pcmt(cmt: list, token: int, ct: list):
     if cmt[0] == "help":
