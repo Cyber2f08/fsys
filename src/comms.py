@@ -98,12 +98,7 @@ def shell(info):
     import random
     msg_dy = ["This SHELL is still on beta, so EXPECT bugs."]
     ct = ['help', 'mode', 'rbinfo', 'man', 'exit', 'clear']
-    def _il_prmd(cmt, mode):
-        if cmt == "exit":
-            _glaclr()
-        if mode.strip() == "pyexec":
-            exec(cmt)
-        
+
     def _il_proc(cmt):
         cmt = cmt.lower()
         cmt = cmt.split()
@@ -153,18 +148,10 @@ def shell(info):
            `-    \`_`"'-    | Goodluck and Have fun! Miaw
 
     Message of the DAY, {msg_dy[random.randint(0, len(msg_dy)-1)]}
-    ''')
-
-    LFSO = ""
-    LFMD = False
+    '''
+    
     while True:
-        ds = ""
-        _ig = _glamod()
-        if _glamod()[0] == True:
-            ds = _glamod()[1]+" "
-        _il = p.input(f" [yellow]{info[0].lower()}[/]@[yellow]yorgc[/] [blue]{ds}[/]# ")
-        if _ig[0] == True:
-            _il_prmd(_il, _ig[1])
-            
+        _il = p.input(f" [yellow]{info[0].lower()}[/]@[yellow]yorgc[/] # ")
+ 
         if _il_proc(_il) != True:
             continue
