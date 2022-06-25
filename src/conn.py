@@ -1,3 +1,4 @@
+from src.ocec import typeval, conchk
 import requests, json
 import config as cfg
 
@@ -9,15 +10,6 @@ cefile = 'certs/certs.pem'
 
 #ID is supposed to be an integer check it's value by using typeval
 
-def conchk(value):
-    if value.status_code != 200:
-        return False;
-    return True;
-
-def typeval(value, atype): # atype means Actual Type.
-    if type(value) != atype:
-        return False, type(value);
-    return True, type(value);
 
 def _get_user_info(id):
     if typeval(id, int)[0] != True:
