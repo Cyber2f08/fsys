@@ -24,4 +24,5 @@ def _reg(uri: str, domain: str, scheme: str = "https") -> bool:
         p.print(f" [red]err[/] -- [green]{domain}[/] -- [yellow]conaberr[/]")
         p.print(f" [blue]deb[/] -- [green]{domain}[/] -- [blue]No Connection. Connection Aborted[/]")
         return False;
+
     p.print(f" rev -- {domain}")

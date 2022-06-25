@@ -97,15 +97,18 @@ def shell(info):
     import os
     import random
     msg_dy = ["This SHELL is still on beta, so EXPECT bugs."]
-    ct = ['help', 'mode', 'rbinfo', 'man', 'exit', 'clear']
+    ct = ['help', 'rbinfo', 'man', 'exit', 'clear', 'echo']
 
     def _il_proc(cmt):
-        cmt = cmt.lower()
-        cmt = cmt.split()
         
+        cmt = cmt.split()
+
         if cmt == []:
             return False;
-        
+
+        if cmt[0] != "echo":
+            cmt = cmt[0:].lower()
+
         token = len(cmt)
         
         for i in range(token):
@@ -137,6 +140,7 @@ def shell(info):
         if _p[0] != True:
             print(f" Command named '{cmt[0]}' is not available, Use 'help' for commands.\n")
             return False;
+
         _pcmt(cmt=cmt, token=token, ct=ct)
 
     os.system('clear')

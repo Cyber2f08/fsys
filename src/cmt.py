@@ -11,7 +11,7 @@ def cmout():
     return "\n"
 
 def _gpcmt():
-    return ["help", "exit", "clear", "rbinfo"]
+    return ["help", "exit", "clear", "rbinfo", 'echo']
 
 def _pcmt(cmt: list, token: int, ct: list):
     if cmt[0] == "help":
@@ -22,7 +22,7 @@ def _pcmt(cmt: list, token: int, ct: list):
  COMMANDS:
      help        | Help used to display commands and it's function.
      man         | Command to see more detailed help of a other command.
-     mode        | Command to change mode of the SHELL.
+     echo        | Echoes word you type.
      clear       | Clear terminal screen to make it look clean.
      rbinfo      | Get roblox informations / infos.
      exit        | Exit the shell.
@@ -60,28 +60,9 @@ def _pcmt(cmt: list, token: int, ct: list):
         p.print(f"  -> Studio version: {_s[1]}")
         p.print(f"  -> QT Studio version: {_s[2]}"+cmit())
 
-    elif cmt[0] == "mode":
-        global LatestFmode
-        print("")
-        H_TX = '''
- Mode command need one argument to define what to switch on / mode on.
- Here some available modes that available.
+    elif cmt[0] == "echo":
+        if token == 1:
+            pass
+        txt = ''.join(cmt[1:])
+        print(' '+txt)
 
- Another way to display mode help: mode --help
- 
- MODES:
-    pyexec          | Executing python code inside the shell, just like python shell.        
-    admin           | Has the most command to configure the shell (NOT AVAILABLE YET.)
-        '''
-        av_mod = ["pyexec"]
-        if token > 1: # Only have 1 subcommand
-            if cmt[1] not in av_mod and cmt[1] == "--help":
-                print(H_TX)
-            if cmt[1] not in av_mod:
-                print("ERROR: Invalid Mode")
-                print(H_TX)
-            if cmt[1] == "pyexec":
-                print("Type exit, to exit.")
-                LatestFmode = "pyexec"
-        print("ERROR: Sufficient argument.")
-        print(H_TX)

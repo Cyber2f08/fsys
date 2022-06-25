@@ -7,4 +7,3 @@ def conchk(value):
     if value.status_code != 200:
         return False, value.status_code;
     return True, value.status_code;
-
