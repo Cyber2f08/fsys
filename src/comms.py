@@ -106,10 +106,12 @@ def shell(info):
         if cmt == []:
             return False;
 
-        if cmt[0] != "echo":
-            cmt = cmt[0:].lower()
-
         token = len(cmt)
+
+        if cmt[0] != "echo":
+            for i in range(token):
+                cmt[i] = cmt[i].lower()
+
         
         for i in range(token):
             cmt[i].strip()

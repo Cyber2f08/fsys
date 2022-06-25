@@ -49,14 +49,17 @@ def _get_roblox_info(platform="windows"):
         rs = requests.get(rbver, verify = cefile)
         if rs.status_code != 200:
             dp.append("Information Err.")
-        dp.append(rs.text)
+        
         rb = requests.get(rbiover,verify = cefile)
         if rb.status_code != 200:
             dp.append("Information Err.")
-        dp.append(rb.text)
+        
         ve = requests.get(verqtio, verify = cefile)
         if ve.status_code != 200:
             dp.append("Informatio Err.")
+
+        dp.append(rs.text)
+        dp.append(rb.text)
         dp.append(ve.text)
         dp.append((rs.status_code, rb.status_code, ve.status_code))
     elif platform == "macos":
@@ -66,10 +69,12 @@ def _get_roblox_info(platform="windows"):
         rs = requests.get(rbver, verify = cefile)
         if rs.status_code != 200:
             dp.append("Information Err.")
-        dp.append(rs.text)
+        
         rb = requests.get(rbiover, verify = cefile)
         if rb.status_code != 200:
             dp.append("Information Err.")
+        
+        dp.append(rs.text)
         dp.append(rb.text)
         dp.append((rs.status_code, rb.status_code))
     return dp;
