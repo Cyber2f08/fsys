@@ -14,7 +14,7 @@ def cmout():
     return "\n"
 
 def _gpcmt():
-    return ["help", "exit", "clear", "rbinfo", "mode"]
+    return ["help", "exit", "clear", "rbinfo"]
 
 def _glamod():
     if LatestFmode == "":
