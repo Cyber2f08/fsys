@@ -1,10 +1,47 @@
 from src.conn import _get_muser_info, _get_user_info, _get_user_primary_group, _get_roblox_info
+from requests.exceptions import *
 import os
 import src.ocec as o
 import src.tsl as t
 import random, sys
 
 Tips = ["Use exit instead of CTRL-C because it will make the shell BROKE."]
+cmod = ""
+
+
+
+
+def _dp_proc(cmtx: list, mode: str):
+    global cmod
+    import time
+    import requests
+    import math
+    from rich.console import Console  
+    
+    p = Console()
+
+    av_rbcore = [""]        
+    
+    for i in range(cmtx[1]):
+        cmtx[0][i].strip
+
+    if mode == "pysh" and cmod == mode:
+        if cmtx[0][0] == ".quit":
+            cmod = ""
+            return;
+        if cmtx[0][0] == "import":
+            p.print("Importing modules outside of the shell is [red]FORBIDDEN[/]")
+            return False;
+        if ";" in cmtx:
+            p.print("Semicolon is forbidden because it could one lining piece of code")
+        djoin = ' '.join(cmtx[0][0:])+" "
+        try:
+            p.print(cmtx)
+            eval(djoin)
+        except Exception as e:
+            print(e)
+        return;
+
 def cmit():
     return "\n";
 
@@ -12,10 +49,7 @@ def cmout():
     return "\n"
 
 def _gpcmt():
-    return ["help", "exit", "clear", "rbinfo", 'echo']
-
-
-
+    return ["help", "exit", "clear", "rbinfo", 'echo', 'dp']
 
 
 def _pcmt(cmt: list, token: int, ct: list):
@@ -30,6 +64,7 @@ def _pcmt(cmt: list, token: int, ct: list):
      echo        | Echoes word you type.
      clear       | Clear terminal screen to make it look clean.
      rbinfo      | Get roblox informations / infos.
+     dp          | Change or switch shell mode to what you prefer on.
      exit        | Exit the shell.
 
  Tips: {Tips[random.randint(0,len(Tips)-1)]}
@@ -46,8 +81,13 @@ def _pcmt(cmt: list, token: int, ct: list):
 
     elif cmt[0] == "rbinfo":
         from rich.console import Console
+        import requests
         p = Console()
-        
+        try:
+            _s1 = requests.get("https://www.google.com")
+        except ConnectionError:
+            p.print(" No Connection at this time.")
+            return;
         '''
         => -p       | Choose operating system. (DEFAULT: Windows)
         '''
@@ -89,3 +129,81 @@ def _pcmt(cmt: list, token: int, ct: list):
             return;
         txt = ' '.join(cmt[1:])+" "
         print(' '+txt)
+    
+    elif cmt[0] == "dp":
+        
+        from rich.console import Console 
+        avm = ['rbcore', 'consv', 'pysh']
+        notimp = ['consv']
+        p = Console()
+
+        def c2list(com: str) -> list:
+
+            com = com.split()
+            if com == []:
+                return False;
+            
+            token = len(com)
+            return [True, com, token];
+
+
+        def _it_dp(mode: str):
+            global cmod
+
+            print("")
+
+            if mode == "pysh":
+                cmod = mode
+                print(" Available limited secure modules have been imported, such as: math, time, requests")
+                print(" Exit mode using '.quit'")
+                print(" Happy Hacking!\n")
+            
+
+            while True:
+                
+                if cmod == "":
+                    print("")
+                    break
+
+                _dp = p.input(f" + [yellow]{mode}[/] @> ")
+                
+                if _dp.strip() == "":
+                    continue
+                _dp_l = c2list(_dp)
+
+                if _dp_l[0] != True:
+                    continue
+
+                if _dp_proc(_dp_l[1:], mode) != True:
+                    continue
+
+        
+        htxt = '''
+ dp used to switch mode on the shell and it's function on the shell you switch on.
+ For more information about a command use 'man command-name'
+
+ MODES:
+     rbcore         | Interact with roblox api.
+     consv          | Lively reloaded configuration editor. (NOT IMPLEMENTED YET)
+     pysh           | Python Shell Alike.
+    
+ EXAMPLES:
+     - dp rbcore    | Initialize rbcore internal shell.
+     - etc..
+
+ Have fun hacking!
+        '''
+        if token > 1:
+            if cmt[1].strip() not in avm:
+                print(" Error: Invalid Mode")
+                print(htxt)
+                return;
+            if cmt[1].strip() in notimp:
+                print(" Error: Mode not implemented.")
+                return;
+            
+            _it_dp(cmt[1])
+            return;
+        print(" Error: Insufficient args")
+        print(htxt)
+

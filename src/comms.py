@@ -5,8 +5,12 @@ from src.auth import Worker
 from src.cmt import _pcmt, _gpcmt
 import src.ocec as o
 
+
 def load():
     pretty.install()
+    from rich.console import Console
+
+    p = Console()
     try:
         import src.auth; import src.cmt; import src.comms; import src.conn; import src.fakecore; import src.ocec; import src.tsl;
     except ImportError as e:
@@ -14,8 +18,6 @@ def load():
         xrint(Warning, e)
         exit()
     xrint(Ok, "No conflicting scripts, that's good!", usprt=False)
-    xrint
-    #CHECK_UPDT = str(input(" Check for an update? (Y/n) \n => "))
     return True;
 
 
@@ -97,7 +99,7 @@ def shell(info):
     import os
     import random
     msg_dy = ["This SHELL is still on beta, so EXPECT bugs."]
-    ct = ['help', 'rbinfo', 'man', 'exit', 'clear', 'echo']
+    ct = ['help', 'rbinfo', 'man', 'exit', 'clear', 'echo', 'dp']
 
     def _il_proc(cmt):
         
@@ -105,21 +107,21 @@ def shell(info):
 
         if cmt == []:
             return False;
-
         token = len(cmt)
 
         if cmt[0] != "echo":
             for i in range(token):
                 cmt[i] = cmt[i].lower()
 
-        
         for i in range(token):
             cmt[i].strip()
+
         def _g():
             for i in range(len(ct)):
                 if ct[i] == cmt[0]:
                     return True, i;
             return False, i;
+            
         _p = _g()
 
         for i in _gpcmt():
