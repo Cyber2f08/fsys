@@ -1,5 +1,6 @@
 from src.conn import _get_muser_info, _get_user_info, _get_user_primary_group, _get_roblox_info
 from requests.exceptions import *
+from src.cmtx import _dp_proc
 import os
 import src.ocec as o
 import src.tsl as t
@@ -7,40 +8,6 @@ import random, sys
 
 Tips = ["Use exit instead of CTRL-C because it will make the shell BROKE."]
 cmod = ""
-
-
-
-
-def _dp_proc(cmtx: list, mode: str):
-    global cmod
-    import time
-    import requests
-    import math
-    from rich.console import Console  
-    
-    p = Console()
-
-    av_rbcore = [""]        
-    
-    for i in range(cmtx[1]):
-        cmtx[0][i].strip
-
-    if mode == "pysh" and cmod == mode:
-        if cmtx[0][0] == ".quit":
-            cmod = ""
-            return;
-        if cmtx[0][0] == "import":
-            p.print("Importing modules outside of the shell is [red]FORBIDDEN[/]")
-            return False;
-        if ";" in cmtx:
-            p.print("Semicolon is forbidden because it could one lining piece of code")
-        djoin = ' '.join(cmtx[0][0:])+" "
-        try:
-            p.print(cmtx)
-            eval(djoin)
-        except Exception as e:
-            print(e)
-        return;
 
 def cmit():
     return "\n";
@@ -155,7 +122,7 @@ def _pcmt(cmt: list, token: int, ct: list):
             if mode == "pysh":
                 cmod = mode
                 print(" Available limited secure modules have been imported, such as: math, time, requests")
-                print(" Exit mode using '.quit'")
+                print(" Exit mode using '.quit' and get more commands using '.help'")
                 print(" Happy Hacking!\n")
             
 
@@ -174,7 +141,10 @@ def _pcmt(cmt: list, token: int, ct: list):
                 if _dp_l[0] != True:
                     continue
 
-                if _dp_proc(_dp_l[1:], mode) != True:
+                mptmp = _dp_proc(_dp_l[1:], mode)
+                if  mptmp[0] != True:
+                    if mptmp[1] == "":
+                        cmod = ""
                     continue
 
         
