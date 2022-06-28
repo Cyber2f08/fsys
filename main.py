@@ -1,4 +1,6 @@
 import config as cfg
+import gc
+gc.disable()
 from src.tsl import Information, Ok, xrint
 from rich import pretty
 from src import comms
