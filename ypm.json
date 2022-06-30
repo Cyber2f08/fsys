@@ -1,0 +1,14 @@
+{
+    "product":
+    {
+        "name": "fSys",
+        "description": "Interactive roblox shell",
+        "language": "python",
+        "version": "0.0.1"
+    },
+    "author":
+    {
+        "name": "Cyber2f08",
+        "email": "cyber.2f08@gmail.com"
+    }
+}
